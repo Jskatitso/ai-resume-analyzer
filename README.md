@@ -24,12 +24,25 @@ To become the leading platform for AI-powered career development, empowering mil
 
 ## 🚀 Features
 
+### Core Analysis Features
 - ⚡ **Instant Resume Analysis:** Upload your resume and get comprehensive feedback in seconds.
 - 🎯 **Targeted Suggestions:** Receive actionable tips to improve your resume's impact and effectiveness.
 - 🏆 **ATS Optimization:** Ensure your resume passes through Applicant Tracking Systems successfully.
-- 💎 **Modern UI:** Clean, responsive, and user-friendly interface.
-- 🔐 **User Authentication:** Secure login and signup system with profile management.
 - 🤖 **AI-Powered Insights:** Advanced AI analysis using OpenAI technology.
+
+### User Management & Profile
+- 🔐 **Secure Authentication:** Complete login and signup system with profile management.
+- 👤 **Profile Management:** Edit your personal information including name, email, and bio.
+- 📸 **Avatar Support:** Upload and manage your profile picture with fallback initials.
+- 📊 **Account Statistics:** Track your membership duration and resume analysis count.
+- ⚙️ **Quick Actions:** Easy access to analyze new resumes, view history, and privacy settings.
+
+### User Experience
+- 💎 **Modern UI:** Clean, responsive, and user-friendly interface built with Tailwind CSS.
+- 📱 **Mobile Responsive:** Optimized for all device sizes and screen orientations.
+- 🔔 **Real-time Feedback:** Success and error notifications for all user actions.
+- 🎨 **Beautiful Design:** Professional and modern design with smooth animations.
+- 🧭 **Intuitive Navigation:** Easy-to-use navigation with breadcrumbs and clear call-to-actions.
 
 ---
 
@@ -77,9 +90,12 @@ ai-resume-analyzer/
 │   ├── analyze/        # Resume analysis page
 │   ├── login/          # Authentication pages
 │   ├── signup/         # User registration
-│   ├── profile/        # User profile management
+│   ├── profile/        # User profile management ✨ NEW
 │   └── api/            # Backend API routes
+│       ├── analyze/    # Resume analysis API
+│       └── profile/    # Profile management API ✨ NEW
 ├── components/         # Reusable UI components
+│   └── ui/            # Shadcn/ui components
 ├── hooks/              # Custom React hooks
 ├── lib/                # Utility functions
 ├── public/             # Static assets
@@ -92,13 +108,32 @@ ai-resume-analyzer/
 
 ## 🧰 Tech Stack
 
-- [Next.js](https://nextjs.org/)
-- [React](https://react.dev/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Radix UI](https://www.radix-ui.com/)
-- [Lucide Icons](https://lucide.dev/)
+- [Next.js](https://nextjs.org/) - React framework
+- [React](https://react.dev/) - UI library
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Radix UI](https://www.radix-ui.com/) - Accessible components
+- [Shadcn/ui](https://ui.shadcn.com/) - Component library
+- [Lucide Icons](https://lucide.dev/) - Beautiful icons
 - [OpenAI API](https://openai.com/) - AI-powered analysis
+
+---
+
+## 🔄 Recent Updates
+
+### Profile Management System ✨
+- **User Profile Page:** Complete profile management with editable fields
+- **Account Statistics:** Track membership duration and analysis count
+- **Avatar Management:** Profile picture upload with fallback initials
+- **Quick Actions:** Easy navigation to key features
+- **Real-time Updates:** Instant feedback for profile changes
+
+### Enhanced User Experience 🎨
+- **Improved Navigation:** Better breadcrumbs and navigation flow
+- **Responsive Design:** Optimized for all device sizes
+- **Loading States:** Smooth loading indicators throughout the app
+- **Error Handling:** Comprehensive error handling and user feedback
+- **Modern UI Components:** Updated design system with Shadcn/ui
 
 ---
 

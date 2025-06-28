@@ -6,7 +6,19 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)
 ![MIT License](https://img.shields.io/badge/License-MIT-green.svg)
 
-> **AI Resume Analyzer** is a modern web app that lets you upload your resume and get instant, AI-powered feedback and optimization tips. Built with Next.js, React, and Tailwind CSS, it helps you improve your resume for better job prospects and ATS (Applicant Tracking System) compatibility.
+> **AI Resume Analyzer** by **ImperialDev Corporation** - A modern web app that lets you upload your resume and get instant, AI-powered feedback and optimization tips. Built with Next.js, React, and Tailwind CSS, it helps you improve your resume for better job prospects and ATS (Applicant Tracking System) compatibility.
+
+---
+
+## 🏢 About ImperialDev Corporation
+
+**ImperialDev Corporation** is a technology company dedicated to pioneering AI-powered career development tools. We believe that every professional deserves access to cutting-edge technology that can accelerate their career growth.
+
+### Our Mission
+To democratize AI technology and make professional development accessible to everyone through innovative solutions like our AI Resume Analyzer.
+
+### Our Vision
+To become the leading platform for AI-powered career development, empowering millions of professionals worldwide to reach their full potential.
 
 ---
 
@@ -16,6 +28,8 @@
 - 🎯 **Targeted Suggestions:** Receive actionable tips to improve your resume's impact and effectiveness.
 - 🏆 **ATS Optimization:** Ensure your resume passes through Applicant Tracking Systems successfully.
 - 💎 **Modern UI:** Clean, responsive, and user-friendly interface.
+- 🔐 **User Authentication:** Secure login and signup system with profile management.
+- 🤖 **AI-Powered Insights:** Advanced AI analysis using OpenAI technology.
 
 ---
 
@@ -59,6 +73,12 @@ $ pnpm dev
 ```
 ai-resume-analyzer/
 ├── app/                # Next.js app directory
+│   ├── about/          # About page
+│   ├── analyze/        # Resume analysis page
+│   ├── login/          # Authentication pages
+│   ├── signup/         # User registration
+│   ├── profile/        # User profile management
+│   └── api/            # Backend API routes
 ├── components/         # Reusable UI components
 ├── hooks/              # Custom React hooks
 ├── lib/                # Utility functions
@@ -78,6 +98,7 @@ ai-resume-analyzer/
 - [TypeScript](https://www.typescriptlang.org/)
 - [Radix UI](https://www.radix-ui.com/)
 - [Lucide Icons](https://lucide.dev/)
+- [OpenAI API](https://openai.com/) - AI-powered analysis
 
 ---
 
@@ -93,4 +114,12 @@ This project is licensed under the MIT License.
 
 ---
 
-**Built with ❤️ using Next.js and AI technology.** 
+## 📞 Contact
+
+- **Email:** contact@imperialdev.com
+- **LinkedIn:** ImperialDev Corporation
+- **GitHub:** @imperialdev
+
+---
+
+**Built with ❤️ by ImperialDev Corporation using Next.js and AI technology.** 

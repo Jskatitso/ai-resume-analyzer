@@ -13,6 +13,9 @@ export default function HomePage() {
             <span className="text-xl font-bold text-gray-900">ResumeAI</span>
           </div>
           <div className="flex items-center space-x-4">
+            <Link href="/about">
+              <Button variant="ghost">About</Button>
+            </Link>
             <Link href="/login">
               <Button variant="ghost">Sign In</Button>
             </Link>
@@ -82,11 +85,18 @@ export default function HomePage() {
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
               <FileText className="h-6 w-6" />
               <span className="text-lg font-semibold">ResumeAI</span>
+              <span className="text-gray-400">by ImperialDev Corporation</span>
             </div>
 
             <div className="flex space-x-6">
+              <Link
+                href="/about"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                About Us
+              </Link>
               <a
-                href="https://github.com"
+                href="https://github.com/Jskatitso/ai-resume-analyzer"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"
@@ -94,18 +104,16 @@ export default function HomePage() {
                 GitHub
               </a>
               <a
-                href="https://vercel.com"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="mailto:contact@imperialdev.com"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                Deployment
+                Contact
               </a>
             </div>
           </div>
 
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 ResumeAI. Built with Next.js and AI technology.</p>
+            <p>&copy; 2024 ImperialDev Corporation. Built with Next.js and AI technology.</p>
           </div>
         </div>
       </footer>

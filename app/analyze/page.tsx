@@ -97,6 +97,12 @@ export default function AnalyzePage() {
                 <User className="h-5 w-5 text-gray-600" />
                 <span className="text-sm text-gray-600">Welcome, User</span>
               </div>
+              <Link href="/profile">
+                <Button variant="ghost" className="flex items-center space-x-2">
+                  <User className="h-4 w-4" />
+                  <span>Profile</span>
+                </Button>
+              </Link>
               <Button variant="outline" onClick={handleLogout} className="flex items-center space-x-2">
                 <LogOut className="h-4 w-4" />
                 <span>Logout</span>

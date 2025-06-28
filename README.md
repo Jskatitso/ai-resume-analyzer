@@ -36,7 +36,7 @@
 
 ```bash
 # 1. Clone the repository
-$ git clone https://github.com/YOUR_GITHUB_USERNAME/ai-resume-analyzer.git
+$ git clone https://github.com/Jskatitso/ai-resume-analyzer.git
 $ cd ai-resume-analyzer
 
 # 2. Install dependencies

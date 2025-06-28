@@ -12,9 +12,14 @@ export default function HomePage() {
             <FileText className="h-8 w-8 text-blue-600" />
             <span className="text-xl font-bold text-gray-900">ResumeAI</span>
           </div>
-          <Link href="/analyze">
-            <Button variant="outline">Get Started</Button>
-          </Link>
+          <div className="flex items-center space-x-4">
+            <Link href="/login">
+              <Button variant="ghost">Sign In</Button>
+            </Link>
+            <Link href="/signup">
+              <Button>Get Started</Button>
+            </Link>
+          </div>
         </div>
       </nav>
 

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Upload, FileText, CheckCircle, AlertCircle, ArrowLeft, Loader2, Download } from "lucide-react"
+import { Upload, FileText, CheckCircle, AlertCircle, ArrowLeft, Loader2, Download, LogOut, User } from "lucide-react"
 
 interface AnalysisResult {
   score: number
@@ -15,6 +15,8 @@ interface AnalysisResult {
   improvements: string[]
   atsCompatibility: number
   keywordSuggestions: string[]
+  extractedText?: string
+  ai_feedback?: string
 }
 
 export default function AnalyzePage() {
@@ -22,6 +24,11 @@ export default function AnalyzePage() {
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null)
   const [error, setError] = useState<string | null>(null)
+
+  const handleLogout = () => {
+    // Mock logout - replace with real authentication
+    window.location.href = "/"
+  }
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const selectedFile = acceptedFiles[0]
@@ -53,31 +60,23 @@ export default function AnalyzePage() {
     setError(null)
 
     try {
-      // Simulate API call with mock data
-      await new Promise((resolve) => setTimeout(resolve, 3000))
+      const formData = new FormData()
+      formData.append('file', file)
 
-      // Mock analysis result
-      const mockResult: AnalysisResult = {
-        score: 78,
-        strengths: [
-          "Strong technical skills section",
-          "Quantified achievements with metrics",
-          "Clear and concise formatting",
-          "Relevant work experience",
-        ],
-        improvements: [
-          "Add more action verbs to job descriptions",
-          "Include a professional summary",
-          "Optimize for ATS with better keyword usage",
-          "Expand on leadership experiences",
-        ],
-        atsCompatibility: 85,
-        keywordSuggestions: ["Project Management", "Data Analysis", "Team Leadership", "Strategic Planning"],
+      const response = await fetch('/api/analyze', {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.error || 'Failed to analyze resume')
       }
 
-      setAnalysisResult(mockResult)
-    } catch (err) {
-      setError("Failed to analyze resume. Please try again.")
+      const data = await response.json()
+      setAnalysisResult(data.result)
+    } catch (err: any) {
+      setError(err.message || 'Failed to analyze resume. Please try again.')
     } finally {
       setIsAnalyzing(false)
     }
@@ -93,9 +92,15 @@ export default function AnalyzePage() {
               <ArrowLeft className="h-5 w-5" />
               <span>Back to Home</span>
             </Link>
-            <div className="flex items-center space-x-2">
-              <FileText className="h-6 w-6 text-blue-600" />
-              <span className="text-lg font-semibold">ResumeAI</span>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <User className="h-5 w-5 text-gray-600" />
+                <span className="text-sm text-gray-600">Welcome, User</span>
+              </div>
+              <Button variant="outline" onClick={handleLogout} className="flex items-center space-x-2">
+                <LogOut className="h-4 w-4" />
+                <span>Logout</span>
+              </Button>
             </div>
           </div>
         </div>
@@ -255,6 +260,20 @@ export default function AnalyzePage() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Extracted Text or AI Feedback (for debugging/transparency) */}
+            {(analysisResult.extractedText || analysisResult.ai_feedback) && (
+              <Card>
+                <CardHeader>
+                  <CardTitle>Extracted Resume Text / AI Feedback</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <pre className="whitespace-pre-wrap text-xs bg-gray-100 p-4 rounded-md overflow-x-auto">
+                    {analysisResult.extractedText || analysisResult.ai_feedback}
+                  </pre>
+                </CardContent>
+              </Card>
+            )}
 
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-4">

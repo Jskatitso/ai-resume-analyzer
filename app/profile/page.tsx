@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { ThemeToggle } from "@/components/theme-toggle"
 import { 
   FileText, 
   User, 
@@ -127,9 +128,9 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Navigation */}
-      <nav className="bg-white border-b">
+      <nav className="bg-white dark:bg-gray-800 border-b dark:border-gray-700">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link href="/analyze" className="flex items-center space-x-2">
@@ -137,6 +138,7 @@ export default function ProfilePage() {
               <span>Back to Analysis</span>
             </Link>
             <div className="flex items-center space-x-4">
+              <ThemeToggle />
               <Button variant="outline" onClick={handleLogout} className="flex items-center space-x-2">
                 <LogOut className="h-4 w-4" />
                 <span>Logout</span>
@@ -149,14 +151,14 @@ export default function ProfilePage() {
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Profile Settings</h1>
-          <p className="text-gray-600">Manage your account and preferences</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Profile Settings</h1>
+          <p className="text-gray-600 dark:text-gray-300">Manage your account and preferences</p>
         </div>
 
         {/* Success/Error Message */}
         {message && (
-          <Alert className={`mb-6 ${messageType === "success" ? "border-green-200 bg-green-50" : "border-red-200 bg-red-50"}`}>
-            <AlertDescription className={messageType === "success" ? "text-green-800" : "text-red-800"}>
+          <Alert className={`mb-6 ${messageType === "success" ? "border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-900/20" : "border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-900/20"}`}>
+            <AlertDescription className={messageType === "success" ? "text-green-800 dark:text-green-200" : "text-red-800 dark:text-red-200"}>
               {message}
             </AlertDescription>
           </Alert>
@@ -262,11 +264,11 @@ export default function ProfilePage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Member since</span>
+                  <span className="text-gray-600 dark:text-gray-400">Member since</span>
                   <span className="font-medium">{profile.joinDate}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Resumes analyzed</span>
+                  <span className="text-gray-600 dark:text-gray-400">Resumes analyzed</span>
                   <span className="font-medium">{profile.analysisCount}</span>
                 </div>
               </CardContent>

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { ThemeToggle } from "@/components/theme-toggle"
 import { Upload, FileText, CheckCircle, AlertCircle, ArrowLeft, Loader2, Download, LogOut, User } from "lucide-react"
 
 interface AnalysisResult {
@@ -83,9 +84,9 @@ export default function AnalyzePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Navigation */}
-      <nav className="bg-white border-b">
+      <nav className="bg-white dark:bg-gray-800 border-b dark:border-gray-700">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center space-x-2">
@@ -93,12 +94,9 @@ export default function AnalyzePage() {
               <span>Back to Home</span>
             </Link>
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <User className="h-5 w-5 text-gray-600" />
-                <span className="text-sm text-gray-600">Welcome, User</span>
-              </div>
+              <ThemeToggle />
               <Link href="/profile">
-                <Button variant="ghost" className="flex items-center space-x-2">
+                <Button variant="outline" className="flex items-center space-x-2">
                   <User className="h-4 w-4" />
                   <span>Profile</span>
                 </Button>
@@ -114,8 +112,8 @@ export default function AnalyzePage() {
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Resume Analysis</h1>
-          <p className="text-gray-600">Upload your resume to get AI-powered feedback and optimization tips</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Resume Analysis</h1>
+          <p className="text-gray-600 dark:text-gray-300">Upload your resume to get AI-powered feedback and optimization tips</p>
         </div>
 
         {/* Upload Section */}
@@ -128,53 +126,54 @@ export default function AnalyzePage() {
               <div
                 {...getRootProps()}
                 className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
-                  isDragActive ? "border-blue-500 bg-blue-50" : "border-gray-300 hover:border-gray-400"
+                  isDragActive 
+                    ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20" 
+                    : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
                 }`}
               >
                 <input {...getInputProps()} />
-                <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                <Upload className="h-12 w-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
                 {isDragActive ? (
-                  <p className="text-blue-600">Drop your resume here...</p>
+                  <p className="text-blue-600 dark:text-blue-400">Drop your resume here...</p>
                 ) : (
                   <div>
-                    <p className="text-gray-600 mb-2">Drag and drop your resume here, or click to browse</p>
-                    <p className="text-sm text-gray-500">Supports PDF, DOC, and DOCX files (max 10MB)</p>
+                    <p className="text-gray-600 dark:text-gray-300 mb-2">Drag and drop your resume here, or click to browse</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Supports PDF, DOC, and DOCX files (max 10MB)</p>
                   </div>
                 )}
               </div>
 
               {file && (
-                <div className="mt-4 p-4 bg-green-50 rounded-lg border border-green-200">
+                <div className="mt-4 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
                   <div className="flex items-center space-x-2">
-                    <CheckCircle className="h-5 w-5 text-green-600" />
-                    <span className="text-green-800 font-medium">{file.name}</span>
-                    <span className="text-green-600 text-sm">({(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+                    <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400" />
+                    <span className="text-green-800 dark:text-green-200 font-medium">{file.name}</span>
+                    <span className="text-green-600 dark:text-green-400 text-sm">({(file.size / 1024 / 1024).toFixed(2)} MB)</span>
                   </div>
                 </div>
               )}
 
               {error && (
-                <Alert className="mt-4" variant="destructive">
-                  <AlertCircle className="h-4 w-4" />
-                  <AlertDescription>{error}</AlertDescription>
+                <Alert className="mt-4 border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20">
+                  <AlertCircle className="h-4 w-4 text-red-600 dark:text-red-400" />
+                  <AlertDescription className="text-red-800 dark:text-red-200">{error}</AlertDescription>
                 </Alert>
               )}
 
-              {file && !isAnalyzing && (
-                <Button onClick={analyzeResume} className="w-full mt-4 bg-blue-600 hover:bg-blue-700" size="lg">
-                  Analyze Resume
-                </Button>
-              )}
-
-              {isAnalyzing && (
-                <div className="mt-4">
-                  <div className="flex items-center justify-center space-x-2 mb-2">
-                    <Loader2 className="h-5 w-5 animate-spin text-blue-600" />
-                    <span className="text-blue-600 font-medium">Analyzing your resume...</span>
-                  </div>
-                  <Progress value={66} className="w-full" />
-                </div>
-              )}
+              <Button
+                onClick={analyzeResume}
+                disabled={!file || isAnalyzing}
+                className="w-full mt-4 bg-blue-600 hover:bg-blue-700"
+              >
+                {isAnalyzing ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Analyzing...
+                  </>
+                ) : (
+                  "Analyze Resume"
+                )}
+              </Button>
             </CardContent>
           </Card>
         )}
@@ -182,19 +181,22 @@ export default function AnalyzePage() {
         {/* Analysis Results */}
         {analysisResult && (
           <div className="space-y-6">
-            {/* Overall Score */}
+            {/* Score Card */}
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <CheckCircle className="h-6 w-6 text-green-600" />
-                  <span>Analysis Complete</span>
-                </CardTitle>
+                <CardTitle>Analysis Score</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-blue-600 mb-2">{analysisResult.score}/100</div>
-                  <p className="text-gray-600">Overall Resume Score</p>
-                  <Progress value={analysisResult.score} className="w-full mt-4" />
+                  <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">
+                    {analysisResult.score}/100
+                  </div>
+                  <Progress value={analysisResult.score} className="w-full" />
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                    {analysisResult.score >= 80 ? "Excellent!" : 
+                     analysisResult.score >= 60 ? "Good, but room for improvement" : 
+                     "Needs significant improvement"}
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -202,14 +204,14 @@ export default function AnalyzePage() {
             {/* Strengths */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-green-600">Strengths</CardTitle>
+                <CardTitle className="text-green-600 dark:text-green-400">Strengths</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
                   {analysisResult.strengths.map((strength, index) => (
                     <li key={index} className="flex items-start space-x-2">
-                      <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                      <span>{strength}</span>
+                      <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700 dark:text-gray-300">{strength}</span>
                     </li>
                   ))}
                 </ul>
@@ -219,14 +221,14 @@ export default function AnalyzePage() {
             {/* Improvements */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-orange-600">Areas for Improvement</CardTitle>
+                <CardTitle className="text-orange-600 dark:text-orange-400">Areas for Improvement</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
                   {analysisResult.improvements.map((improvement, index) => (
                     <li key={index} className="flex items-start space-x-2">
-                      <AlertCircle className="h-5 w-5 text-orange-600 mt-0.5 flex-shrink-0" />
-                      <span>{improvement}</span>
+                      <AlertCircle className="h-5 w-5 text-orange-600 dark:text-orange-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700 dark:text-gray-300">{improvement}</span>
                     </li>
                   ))}
                 </ul>
@@ -239,15 +241,17 @@ export default function AnalyzePage() {
                 <CardTitle>ATS Compatibility</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex items-center justify-between mb-2">
-                  <span>ATS Score</span>
-                  <span className="font-bold">{analysisResult.atsCompatibility}%</span>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">
+                    {analysisResult.atsCompatibility}%
+                  </div>
+                  <Progress value={analysisResult.atsCompatibility} className="w-full" />
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                    {analysisResult.atsCompatibility >= 90 ? "Excellent ATS compatibility" :
+                     analysisResult.atsCompatibility >= 70 ? "Good ATS compatibility" :
+                     "Needs improvement for ATS systems"}
+                  </p>
                 </div>
-                <Progress value={analysisResult.atsCompatibility} className="w-full mb-4" />
-                <p className="text-sm text-gray-600">
-                  Your resume is {analysisResult.atsCompatibility >= 80 ? "well" : "moderately"} optimized for Applicant
-                  Tracking Systems.
-                </p>
               </CardContent>
             </Card>
 
@@ -259,7 +263,10 @@ export default function AnalyzePage() {
               <CardContent>
                 <div className="flex flex-wrap gap-2">
                   {analysisResult.keywordSuggestions.map((keyword, index) => (
-                    <span key={index} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                    <span
+                      key={index}
+                      className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"
+                    >
                       {keyword}
                     </span>
                   ))}
@@ -287,6 +294,7 @@ export default function AnalyzePage() {
                 onClick={() => {
                   setFile(null)
                   setAnalysisResult(null)
+                  setError(null)
                 }}
                 variant="outline"
                 className="flex-1"
@@ -294,7 +302,7 @@ export default function AnalyzePage() {
                 Analyze Another Resume
               </Button>
               <Button className="flex-1 bg-blue-600 hover:bg-blue-700">
-                <Download className="h-4 w-4 mr-2" />
+                <Download className="mr-2 h-4 w-4" />
                 Download Report
               </Button>
             </div>
